@@ -70,13 +70,36 @@ function Todoapp() {
     console.log("Completada con exito");
   };
 
+  function getColorForPriority(priority) {
+    switch (priority) {
+      case "High Prioriry":
+        return "#ffcccc";
+      case "Mid Priority":
+        return "#ffcc99";
+      case "Low Priority":
+        return "#ccffcc";
+      case "Urgent":
+        return "#ff6666";
+      default:
+        return "#f0f0f0";
+    }
+  }
+
   return (
     <div style={{ flexGrow: 1, padding: "20px" }}>
       <Grid container spacing={3}>
         <Grid item xs={6}>
           <Paper style={{ padding: "20px", height: "60vh", overflow: "auto" }}>
             {task.map((task, index) => (
-              <Card key={index} style={{ margin: "10px" }}>
+              <Card
+                key={index}
+                className="card"
+                style={{
+                  margin: "10px",
+                  border: 1,
+                  backgroundColor: getColorForPriority(task.task_Priority),
+                }}
+              >
                 <CardContent>
                   <Typography variant="h5">{task.name}</Typography>
                   <Typography color="textSecondary">
@@ -100,7 +123,14 @@ function Todoapp() {
         <Grid item xs={6}>
           <Paper style={{ padding: "20px", height: "60vh", overflow: "auto" }}>
             {completedTasks.map((task, index) => (
-              <Card key={index} style={{ margin: "10px" }}>
+              <Card
+                key={index}
+                className="card"
+                style={{
+                  margin: "10px",
+                  backgroundColor: getColorForPriority(task.task_Priority),
+                }}
+              >
                 <CardContent>
                   <Typography variant="h5">{task.name}</Typography>
                   <Typography color="textSecondary">
